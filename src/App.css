@@ -280,9 +280,12 @@
 }
 
 .track-surface {
-  width: 100%;
+  width: 60%;
   height: 100%;
   position: relative;
+  margin: 0 auto;
+  border-left: 4px solid rgba(255, 255, 255, 0.3);
+  border-right: 4px solid rgba(255, 255, 255, 0.3);
 }
 
 .lane-markers {
@@ -296,9 +299,16 @@
 .lane-line {
   position: absolute;
   top: 0;
-  width: 2px;
+  width: 3px;
   height: 100%;
-  opacity: 0.5;
+  opacity: 0.8;
+  background: repeating-linear-gradient(
+    to bottom,
+    currentColor 0,
+    currentColor 20px,
+    transparent 20px,
+    transparent 40px
+  );
 }
 
 .obstacle {
@@ -310,22 +320,33 @@
 
 .racer {
   position: absolute;
-  width: 40px;
-  height: 60px;
+  width: 50px;
+  height: 70px;
   transform: translate(-50%, -50%);
   transition: left 0.2s ease-out;
   z-index: 10;
-  border-radius: 8px;
-  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+  border: 3px solid rgba(255, 255, 255, 0.5);
   display: flex;
   align-items: center;
   justify-content: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
 
 .racer.player {
   border-color: var(--color-primary);
-  box-shadow: 0 0 20px var(--color-primary);
+  box-shadow: 0 0 30px var(--color-primary), 0 4px 10px rgba(0, 0, 0, 0.5);
   z-index: 15;
+  border-width: 4px;
+}
+
+.racer.player.accelerating {
+  animation: speed-pulse 0.3s ease-in-out infinite alternate;
+}
+
+@keyframes speed-pulse {
+  from { transform: translate(-50%, -50%) scale(1); }
+  to { transform: translate(-50%, -50%) scale(1.05); }
 }
 
 .racer-body {
@@ -340,7 +361,8 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-size: 2rem;
+  font-size: 2.5rem;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
 }
 
 .racer-name {

@@ -109,7 +109,7 @@ export class GameEngine {
         };
 
         // Check if race is finished for this racer
-        if (newLap >= GAME_CONSTANTS.LAPS_PER_RACE) {
+        if (newLap > GAME_CONSTANTS.LAPS_PER_RACE) {
           updatedRacer = {
             ...updatedRacer,
             hasFinished: true,

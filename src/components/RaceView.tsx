@@ -20,6 +20,12 @@ export const RaceView: React.FC<RaceViewProps> = ({
   const [showCountdown, setShowCountdown] = useState(true);
   const gameEngineRef = useRef<GameEngine | null>(null);
   const playerInput = useKeyboard();
+  const playerInputRef = useRef(playerInput);
+
+  // Keep input ref updated
+  useEffect(() => {
+    playerInputRef.current = playerInput;
+  }, [playerInput]);
 
   // Countdown effect
   useEffect(() => {
@@ -47,7 +53,7 @@ export const RaceView: React.FC<RaceViewProps> = ({
     gameEngineRef.current = new GameEngine(
       updatedState,
       (newState) => setRaceState(newState),
-      () => playerInput
+      () => playerInputRef.current
     );
     gameEngineRef.current.start();
   };
